@@ -21,7 +21,10 @@
         <img id="profile-picture" src="https://ui-avatars.com/api/?name=John+Doe&size=255" alt="">
       </div>
       <div class="col">
-        <h1>Hector Benitez</h1>
+        <!-- Colocar código PHP en línea o embebido dentro de un documento html
+        Para ello es importante que el archivo tenga extensión .php de lo contrario el interprete de PHP
+        no lo podra procesar -->
+        <h1><?php echo 'Alejandro González Reyes'; ?></h1>
         <h2>PHP Developer</h2>
         <ul>
           <li>Mail: hector@mail.com</li>
