@@ -1,3 +1,26 @@
+<?php
+	/* Una práctica común en el pasado era declarar un bloque de PHP al inicio
+	para después utilizar esa lógica generada en nuestro template HTML */
+	$edad = 33;
+	$nombre = 'Alejandro';
+	$apellidos = 'González Reyes';
+	$peso = 96.89;
+	$casado = false;
+
+	//Muestra información sobre una variable
+	var_dump($peso);
+	//Concatenar información
+	$nombre_completo = 'Su nombre es: ' . $nombre . ' ' . $apellidos;
+	//Direfencia entre comillas simples y dobles. En simples no puedo interpretar dentro el valor de una variable
+	//En comillas dobles si.
+	$tunombre = "Su nombre es $nombre $apellidos";
+	/** PHP es un lenguaje debilmente tipado, no es necesario declarar el tipo de dato que
+	 * almacena una variable.
+	 * Podemos forzar el tipo de dato en PHP empleando Type-casting
+	 * (type) $mivariable
+	 */
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -24,8 +47,15 @@
         <!-- Colocar código PHP en línea o embebido dentro de un documento html
         Para ello es importante que el archivo tenga extensión .php de lo contrario el interprete de PHP
         no lo podra procesar -->
-        <h1><?php echo 'Alejandro González Reyes'; ?></h1>
+        <h1><?php echo $tunombre; ?></h1>
         <h2>PHP Developer</h2>
+        <ul>
+          <li>Edad: <?php echo $edad; ?></li>
+          <li>Peso: <?php echo $peso; ?> Kg.</li>
+          <!-- Uso de operador ternario, evalúa el valor lógico de una variable
+          si es verdadero, hace lo que esta después del ?, de lo contrario ejecuta
+          lo que esta después de los : -->
+          <li>Estado civil: <?php echo $casado ? "Casado" : "Soltero"; ?></li>
         <ul>
           <li>Mail: hector@mail.com</li>
           <li>Phone: 1234567890</li>
