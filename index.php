@@ -1,24 +1,42 @@
 <?php
 	/* Una práctica común en el pasado era declarar un bloque de PHP al inicio
 	para después utilizar esa lógica generada en nuestro template HTML */
-	$edad = 33;
-	$nombre = 'Alejandro';
-	$apellidos = 'González Reyes';
-	$peso = 96.89;
-	$casado = false;
+  $nombre = 'Alejandro González Reyes';
+  
+  //Los arreglos son tipos de datos compuestos que nos permiten almacenar diferente tipo de información dentro de una variable
+  //Arreglos con índice numérico
+  $jobs = [
+    'PHP Developer',
+    'Pyhton Dev',
+    'DevOps'
+  ];
+  //Arreglos asociativos con indices numéricos o cadena
+  $frutas = [
+    '0' => 'Manzana',
+    '1' => 'Mandarina',
+    '2' => 'Pera',
+    'lenguaje' => 'Php',
+    'experiencia' => '2',
+  ];
 
-	//Muestra información sobre una variable
-	var_dump($peso);
-	//Concatenar información
-	$nombre_completo = 'Su nombre es: ' . $nombre . ' ' . $apellidos;
-	//Direfencia entre comillas simples y dobles. En simples no puedo interpretar dentro el valor de una variable
-	//En comillas dobles si.
-	$tunombre = "Su nombre es $nombre $apellidos";
-	/** PHP es un lenguaje debilmente tipado, no es necesario declarar el tipo de dato que
-	 * almacena una variable.
-	 * Podemos forzar el tipo de dato en PHP empleando Type-casting
-	 * (type) $mivariable
-	 */
+  //Arreglos asociativos | mapas | clave - valor
+  $trabajos = [
+    [
+      'title' => 'PHP Developer',
+      'description' => 'Descripción de la experiencia adquirida con el lenguaje de programación PHP',
+    ],
+    [
+      'title' => 'Python Dev',
+      'description' => 'Experiencia con Python.',
+    ],
+    [
+      'title' => 'DevOps',
+      'description' => 'Experiencia trabajando como Devops',
+    ]
+  ];
+
+  var_dump($jobs);
+  var_dump($jobs[0]);
 ?>
 
 <!doctype html>
@@ -44,18 +62,19 @@
         <img id="profile-picture" src="https://ui-avatars.com/api/?name=John+Doe&size=255" alt="">
       </div>
       <div class="col">
+        <ul>
+        <?php
+          //Ejemplo de como recorrer el contenido de un arreglo no importando si es de indice numérico o cadena.
+          foreach ($frutas as $key => $value) {
+            echo "<li>$key : $value</li>";
+          }
+        ?>
+        </ul>
         <!-- Colocar código PHP en línea o embebido dentro de un documento html
         Para ello es importante que el archivo tenga extensión .php de lo contrario el interprete de PHP
         no lo podra procesar -->
-        <h1><?php echo $tunombre; ?></h1>
+        <h1><?php echo $nombre; ?></h1>
         <h2>PHP Developer</h2>
-        <ul>
-          <li>Edad: <?php echo $edad; ?></li>
-          <li>Peso: <?php echo $peso; ?> Kg.</li>
-          <!-- Uso de operador ternario, evalúa el valor lógico de una variable
-          si es verdadero, hace lo que esta después del ?, de lo contrario ejecuta
-          lo que esta después de los : -->
-          <li>Estado civil: <?php echo $casado ? "Casado" : "Soltero"; ?></li>
         <ul>
           <li>Mail: hector@mail.com</li>
           <li>Phone: 1234567890</li>
@@ -79,8 +98,9 @@
           <h3 class="border-bottom-gray" >Work Experience</h3>
           <ul>
             <li class="work-position">
-              <h5>PHP Developer</h5>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sapiente sed pariatur sint exercitationem eos expedita eveniet veniam ullam, quia neque facilis dicta voluptatibus. Eveniet doloremque ipsum itaque obcaecati nihil.</p>
+              <!--h5><?php //echo $jobs[0]; ?></h5-->
+              <h5><?php echo $trabajos[0]['title']; ?></h5>
+              <p><?php echo $trabajos[0]['description'] ?></p>
               <strong>Achievements:</strong>
               <ul>
                 <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
@@ -89,8 +109,9 @@
               </ul>
             </li>
             <li class="work-position">
-                <h5>PHP Developer</h5>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sapiente sed pariatur sint exercitationem eos expedita eveniet veniam ullam, quia neque facilis dicta voluptatibus. Eveniet doloremque ipsum itaque obcaecati nihil.</p>
+                <!--h5><?php //echo $jobs[1]; ?></h5-->
+                <h5><?php echo $trabajos[1]['title']; ?></h5>
+                <p><?php echo $trabajos[1]['description']; ?></p>
                 <strong>Achievements:</strong>
                 <ul>
                   <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
@@ -99,8 +120,9 @@
                 </ul>
               </li>
               <li class="work-position">
-                  <h5>PHP Developer</h5>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sapiente sed pariatur sint exercitationem eos expedita eveniet veniam ullam, quia neque facilis dicta voluptatibus. Eveniet doloremque ipsum itaque obcaecati nihil.</p>
+                  <!--h5><?php //echo $jobs[2]; ?></h5-->
+                  <h5><?php echo $trabajos[2]['title']; ?></h5>
+                  <p><?php echo $trabajos[2]['description']; ?></p>
                   <strong>Achievements:</strong>
                   <ul>
                     <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
