@@ -1,42 +1,26 @@
 <?php
 	/* Una práctica común en el pasado era declarar un bloque de PHP al inicio
 	para después utilizar esa lógica generada en nuestro template HTML */
-  $nombre = 'Alejandro González Reyes';
-  
-  //Los arreglos son tipos de datos compuestos que nos permiten almacenar diferente tipo de información dentro de una variable
-  //Arreglos con índice numérico
+  $name = 'Alejandro González Reyes';
   $jobs = [
-    'PHP Developer',
-    'Pyhton Dev',
-    'DevOps'
-  ];
-  //Arreglos asociativos con indices numéricos o cadena
-  $frutas = [
-    '0' => 'Manzana',
-    '1' => 'Mandarina',
-    '2' => 'Pera',
-    'lenguaje' => 'Php',
-    'experiencia' => '2',
-  ];
-
-  //Arreglos asociativos | mapas | clave - valor
-  $trabajos = [
     [
-      'title' => 'PHP Developer',
-      'description' => 'Descripción de la experiencia adquirida con el lenguaje de programación PHP',
+      'title'       => 'Desarrollador PHP Junior',
+      'description' => 'Experiencia detallada trabajando con PHP',
     ],
     [
-      'title' => 'Python Dev',
-      'description' => 'Experiencia con Python.',
+      'title'       => 'Desarrollador Python',
+      'description' => 'Narración experiencia con desarrollos utilizando el lenguaje de programación Python',
     ],
     [
-      'title' => 'DevOps',
-      'description' => 'Experiencia trabajando como Devops',
-    ]
+      'title'       => 'Desarrollador FrontEnd',
+      'description' => 'Experiencia desarrollando con herramientas del lado del cliente',
+    ],
+    [
+      'title'       => 'Administrador de Base de Datos',
+      'description' => 'Experiencia en la administración con bases de datoos',
+    ],
   ];
-
-  var_dump($jobs);
-  var_dump($jobs[0]);
+  
 ?>
 
 <!doctype html>
@@ -62,18 +46,10 @@
         <img id="profile-picture" src="https://ui-avatars.com/api/?name=John+Doe&size=255" alt="">
       </div>
       <div class="col">
-        <ul>
-        <?php
-          //Ejemplo de como recorrer el contenido de un arreglo no importando si es de indice numérico o cadena.
-          foreach ($frutas as $key => $value) {
-            echo "<li>$key : $value</li>";
-          }
-        ?>
-        </ul>
         <!-- Colocar código PHP en línea o embebido dentro de un documento html
         Para ello es importante que el archivo tenga extensión .php de lo contrario el interprete de PHP
         no lo podra procesar -->
-        <h1><?php echo $nombre; ?></h1>
+        <h1><?php echo $name; ?></h1>
         <h2>PHP Developer</h2>
         <ul>
           <li>Mail: hector@mail.com</li>
@@ -97,40 +73,65 @@
         <div>
           <h3 class="border-bottom-gray" >Work Experience</h3>
           <ul>
-            <li class="work-position">
-              <!--h5><?php //echo $jobs[0]; ?></h5-->
-              <h5><?php echo $trabajos[0]['title']; ?></h5>
-              <p><?php echo $trabajos[0]['description'] ?></p>
-              <strong>Achievements:</strong>
-              <ul>
-                <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-              </ul>
-            </li>
-            <li class="work-position">
-                <!--h5><?php //echo $jobs[1]; ?></h5-->
-                <h5><?php echo $trabajos[1]['title']; ?></h5>
-                <p><?php echo $trabajos[1]['description']; ?></p>
-                <strong>Achievements:</strong>
-                <ul>
-                  <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                  <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                  <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                </ul>
-              </li>
-              <li class="work-position">
-                  <!--h5><?php //echo $jobs[2]; ?></h5-->
-                  <h5><?php echo $trabajos[2]['title']; ?></h5>
-                  <p><?php echo $trabajos[2]['description']; ?></p>
-                  <strong>Achievements:</strong>
-                  <ul>
-                    <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                    <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                    <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                  </ul>
-                </li>
+          <?php
+            /**
+             * El ciclo for es una estructura de iterativa muy util al momento de querer recorrer el contenido de un arreglo
+             * Tiene un punto incial, un punto final y un incremento
+             * 
+             * El operador de post-incremento incrementa el valor de la variable después de haber
+             * ejecutado dicha linea.
+             * variable++
+             * 
+             * La función count() permite saber el número de elementos que existen en un arreglo
+             * 
+             * Los arreglos no pueden ser declarados como cualquier variable dentro de las comillas dobles
+             * PHP no los interpreta como tal, para ello hay que emplear la concatenacion o simplemente
+             * encerrarlos entre llaves
+             */
+            $num_elementos = count($jobs);
+            for($contador = 0; $contador < $num_elementos; $contador++) {
+              echo "<li class='work-position'>";
+                echo "<h5>{$jobs[$contador]['title']}</h5>";
+                echo "<p>" . $jobs[$contador]['description'] . "</p>";
+                echo "<strong>Achievements:</strong>";
+                echo "<ul>";
+                  echo "<li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>";
+                  echo "<li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>";
+                  echo "<li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>";
+                echo "</ul>";
+              echo "</li>";
+            }
+            ?>
           </ul>
+          <hr>
+          <hr>
+          <ol>
+          <?php
+            $contador = 0;
+            $num_elementos = count($jobs);
+            /**
+             * La estructura de repetición do-while perimite que se ejecute al menos una vez las instrucciones declaradas
+             * internamente, al final se debe declarar la condicion que establece hasta cuando se debe repetir.
+             * 
+             * Para ello es importante tener una variable de control inicializada afuera y alterada internamente
+             * para que la estructura sea finita (finalice en algún momento)
+             */
+            do {
+              echo "<li class='work-position'>";
+                echo "<h5>{$jobs[$contador]['title']}</h5>";
+                echo "<p>" . $jobs[$contador]['description'] . "</p>";
+                echo "<strong>Achievements:</strong>";
+                echo "<ul>";
+                  echo "<li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>";
+                  echo "<li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>";
+                  echo "<li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>";
+                echo "</ul>";
+              echo "</li>";
+            }while(++$contador < $num_elementos);
+            //El operador de pre-incremento, incrementa el valor de la variable en ese momento donde se encuentre declarado
+            //++variable
+          ?>
+          </ol>
         </div>
         <div>
             <h3 class="border-bottom-gray">Projects</h3>
