@@ -36,6 +36,8 @@
   /**
    * Función para imprimir los detalles de un trabajo
    * recibe como parametro el trabajo actual y el total de meses de experiencia (sumatoria)
+   * 
+   * Cabe mencionar que recibe un objeto de tipo Job
    */
   function imprimirDetallesJob($job, $total_meses) {
 
@@ -44,19 +46,19 @@
      * como visibles. En caso contrario...
      * Indicar que la función debe salir de ejecucion con RETURN
      */
-    if($job['visible'] != true) {
+    if($job->visible != true) {
       return;
     }
 
     echo "<li class='work-position'>";
-      echo "<h5>{$job['title']}</h5>";
-      echo "<p>" . $job['description'] . "</p>";
+      echo "<h5>{$job->getTitle()}</h5>";
+      echo "<p>$job->description</p>";
       //Invocar otra función cuya labor es mostrar una leyenda formateada total de tiempo de experiencia
       echo "<p>Hace ya: ". tiempoLaboral($total_meses) ."</p>";
       echo "<strong>Achievements:</strong>";
       echo "<ul>";
-        for ($i=0; $i < count($job['logros']); $i++) { 
-          echo "<li>{$job['logros'][$i]}.</li>";
+        for ($i=0; $i < count($job->logros); $i++) { 
+          echo "<li>{$job->logros[$i]}.</li>";
         }
       echo "</ul>";
     echo "</li>";

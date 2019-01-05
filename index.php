@@ -82,20 +82,7 @@
           <h3 class="border-bottom-gray" >Work Experience</h3>
           <ul>
           <?php
-            /**
-             * El ciclo for es una estructura de iterativa muy util al momento de querer recorrer el contenido de un arreglo
-             * Tiene un punto incial, un punto final y un incremento
-             * 
-             * El operador de post-incremento incrementa el valor de la variable después de haber
-             * ejecutado dicha linea.
-             * variable++
-             * 
-             * La función count() permite saber el número de elementos que existen en un arreglo
-             * 
-             * Los arreglos no pueden ser declarados como cualquier variable dentro de las comillas dobles
-             * PHP no los interpreta como tal, para ello hay que emplear la concatenacion o simplemente
-             * encerrarlos entre llaves
-             */
+            
             $num_elementos = count($jobs);
             
             //Inicializar el acumuluador de meses de experiencias en los trabajos registrados.
@@ -104,7 +91,10 @@
             for($contador = 0; $contador < $num_elementos; $contador++) {
 
               //Acumulador de meses de experiencia en los trabajos registrados
-              $totalMeses += $jobs[$contador]['meses'];
+              /**
+               * Recordar que el arreglo contiene objetos de tipo Job
+               */
+              $totalMeses += $jobs[$contador]->meses;
 
               /**
                * Si el total de meses de experiencia hasta el momento superan el limite 
@@ -118,7 +108,10 @@
                 break;
               }
               
-              //Invocar la función para que imprima los detalles del trabajo actual en el arreglo, así como la suma total de meses de experiencia
+              //Invocar la función para que imprima los detalles del trabajo actual en el arreglo, 
+              //así como la suma total de meses de experiencia
+              
+              //En este caso pasamos el objeto localizado en esta posición actual en el arreglo
               imprimirDetallesJob($jobs[$contador], $totalMeses);
             }
             ?>
