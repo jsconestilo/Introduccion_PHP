@@ -4,7 +4,7 @@
   $name = 'Alejandro González Reyes';
 
   //Limit para mostrar las experiencias de trabajo menores o iguales a 20 meses
-  $limiteMeses = 40;
+  $limiteMeses = 400;
   
   /**
    * Para mantener los scripts de PHP mas ligeros es posible dividir el código en multiples archivos
