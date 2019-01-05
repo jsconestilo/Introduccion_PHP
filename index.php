@@ -2,26 +2,38 @@
 	/* Una práctica común en el pasado era declarar un bloque de PHP al inicio
 	para después utilizar esa lógica generada en nuestro template HTML */
   $name = 'Alejandro González Reyes';
+
+  //Limit para mostrar las experiencias de trabajo menores o iguales a 20 meses
+  $limiteMeses = 20;
+  
   $jobs = [
     [
       'title'       => 'Desarrollador PHP Junior',
       'description' => 'Experiencia detallada trabajando con PHP',
       'logros'      => ['Sistema clínico dental', 'Sistema bolsa de trabajo', 'Sistema de punto de venta'],
+      'visible'     => true,
+      'meses'       => 8,
     ],
     [
       'title'       => 'Desarrollador Python',
       'description' => 'Narración experiencia con desarrollos utilizando el lenguaje de programación Python',
       'logros'      => ['GUI de escritorio', 'Videojuego de plataformas', 'Plataforma educativa IUEM'],
+      'visible'     => false,
+      'meses'       => 2,
     ],
     [
       'title'       => 'Desarrollador FrontEnd',
       'description' => 'Experiencia desarrollando con herramientas del lado del cliente',
       'logros'      => ['Sitio Web Barbacoa Don Ramón', 'Sitio Web PSEDUCA', 'Sitio Web Compudigital', 'Sitio Web XPSmart', 'Sitio Web Pastelería Susan'],
+      'visible'     => true,
+      'meses'       => 9,
     ],
     [
       'title'       => 'Administrador de Base de Datos',
       'description' => 'Experiencia en la administración con bases de datoos',
       'logros'      => ['Sistema de base de datos para clínica médica la santa fe'],
+      'visible'     => true,
+      'meses'       => 5,
     ],
   ];
   
@@ -93,10 +105,40 @@
              * encerrarlos entre llaves
              */
             $num_elementos = count($jobs);
+            
+            //Inicializar el acumuluador de meses de experiencias en los trabajos registrados.
+            $totalMeses = 0;
+
             for($contador = 0; $contador < $num_elementos; $contador++) {
+
+              //Acumulador de meses de experiencia en los trabajos registrados
+              $totalMeses += $jobs[$contador]['meses'];
+
+              /**
+               * Si el total de meses de experiencia hasta el momento superan el limite 
+               * registrado al inicio del script. Entonces hacemos un BREAK (paramos o detenemos)
+               * al ciclo, y por tanto las siguientes iteraciones no se ejecutarían.
+               * 
+               * La estructura condicional IF evalua una condición lógica, en caso de ser verdadera
+               * se ejecutan sus instrucciones internas, de lo contrario no se ejecutan
+               */
+              if($totalMeses > $limiteMeses) {
+                break;
+              }
+
+              /**
+               * Mostrar solo aquellas experiencias de trabajo que en el arreglo estén declaradas
+               * como visibles. En caso contrario...
+               * Indicar al ciclo que CONTINUE con la siguiente iteración (salta o brinca)
+               */
+              if($jobs[$contador]['visible'] != true) {
+                continue;
+              }
+              
               echo "<li class='work-position'>";
                 echo "<h5>{$jobs[$contador]['title']}</h5>";
                 echo "<p>" . $jobs[$contador]['description'] . "</p>";
+                echo "<p>Hace ya: $totalMeses meses</p>";
                 echo "<strong>Achievements:</strong>";
                 echo "<ul>";
                   for ($i=0; $i < count($jobs[$contador]['logros']); $i++) { 
@@ -107,35 +149,6 @@
             }
             ?>
           </ul>
-          <hr>
-          <hr>
-          <ol>
-          <?php
-            $contador = 0;
-            $num_elementos = count($jobs);
-            /**
-             * La estructura de repetición do-while perimite que se ejecute al menos una vez las instrucciones declaradas
-             * internamente, al final se debe declarar la condicion que establece hasta cuando se debe repetir.
-             * 
-             * Para ello es importante tener una variable de control inicializada afuera y alterada internamente
-             * para que la estructura sea finita (finalice en algún momento)
-             */
-            do {
-              echo "<li class='work-position'>";
-                echo "<h5>{$jobs[$contador]['title']}</h5>";
-                echo "<p>" . $jobs[$contador]['description'] . "</p>";
-                echo "<strong>Achievements:</strong>";
-                echo "<ul>";
-                  foreach($jobs[$contador]['logros'] as $logro) {
-                    echo "<li>". $logro ."</li>";
-                  }
-                echo "</ul>";
-              echo "</li>";
-            }while(++$contador < $num_elementos);
-            //El operador de pre-incremento, incrementa el valor de la variable en ese momento donde se encuentre declarado
-            //++variable
-          ?>
-          </ol>
         </div>
         <div>
             <h3 class="border-bottom-gray">Projects</h3>
