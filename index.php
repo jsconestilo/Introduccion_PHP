@@ -6,18 +6,22 @@
     [
       'title'       => 'Desarrollador PHP Junior',
       'description' => 'Experiencia detallada trabajando con PHP',
+      'logros'      => ['Sistema clínico dental', 'Sistema bolsa de trabajo', 'Sistema de punto de venta'],
     ],
     [
       'title'       => 'Desarrollador Python',
       'description' => 'Narración experiencia con desarrollos utilizando el lenguaje de programación Python',
+      'logros'      => ['GUI de escritorio', 'Videojuego de plataformas', 'Plataforma educativa IUEM'],
     ],
     [
       'title'       => 'Desarrollador FrontEnd',
       'description' => 'Experiencia desarrollando con herramientas del lado del cliente',
+      'logros'      => ['Sitio Web Barbacoa Don Ramón', 'Sitio Web PSEDUCA', 'Sitio Web Compudigital', 'Sitio Web XPSmart', 'Sitio Web Pastelería Susan'],
     ],
     [
       'title'       => 'Administrador de Base de Datos',
       'description' => 'Experiencia en la administración con bases de datoos',
+      'logros'      => ['Sistema de base de datos para clínica médica la santa fe'],
     ],
   ];
   
@@ -95,9 +99,9 @@
                 echo "<p>" . $jobs[$contador]['description'] . "</p>";
                 echo "<strong>Achievements:</strong>";
                 echo "<ul>";
-                  echo "<li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>";
-                  echo "<li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>";
-                  echo "<li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>";
+                  for ($i=0; $i < count($jobs[$contador]['logros']); $i++) { 
+                    echo "<li>{$jobs[$contador]['logros'][$i]}.</li>";
+                  }
                 echo "</ul>";
               echo "</li>";
             }
@@ -122,9 +126,9 @@
                 echo "<p>" . $jobs[$contador]['description'] . "</p>";
                 echo "<strong>Achievements:</strong>";
                 echo "<ul>";
-                  echo "<li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>";
-                  echo "<li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>";
-                  echo "<li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>";
+                  foreach($jobs[$contador]['logros'] as $logro) {
+                    echo "<li>". $logro ."</li>";
+                  }
                 echo "</ul>";
               echo "</li>";
             }while(++$contador < $num_elementos);
