@@ -7,6 +7,20 @@
 require_once 'app/Models/Job.php';
 require_once 'app/Models/Project.php';
 
+require_once 'libs-terceros/Project.php';
+
+/**
+ * Especificamos los espacios de nombres donde se encuentran declaradas las clases importadas en este script
+ * seguido del nombre de las mismas.
+ * 
+ * Si existen clases con el mismo nombre, aunque en diferente namespace, se emplea un alias para nombrar
+ * con otro nombre la clase conflictiva 
+ */
+use App\Models\Job;
+use App\Models\Project;
+
+use Libsxpsmart\Project as NewProject;
+
 /**
  * Generamos instancias (objetos independientes) de nuestra clase Job
  */
@@ -37,6 +51,16 @@ $job5->meses = 98;
 $project1 = new Project('Proyecto A', 'Descripción detallada del proyecto identificado como A');
 $project2 = new Project('Proyecto B', 'Descripción detallada del proyecto identificado como B');
 $project3 = new Project('Proyecto c', 'Descripción detallada del proyecto identificado como C');
+
+/**
+ * Generamos una instancia de la clase de terceros (cuyo nombre es identico a Project)
+ * 
+ * Esto ocasiona problemas, por ello durante la instanciación debemos anteponer el nombre del namespaces\nombreClase
+ * o en su defecto declarar un "use" y como hay nombres de clases identicas a usar..
+ * nombrarlas con un alias "as"
+ */
+//$lib_project = new Libsxpsmart\Project();
+$lib_project = new NewProject();
 
 /**
  * Ahora este es un arreglo de objetos de tipo Job

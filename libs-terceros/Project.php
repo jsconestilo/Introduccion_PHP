@@ -15,14 +15,20 @@
  * 
  * Debe ser la primera definición en el script
  */
-namespace App\Models;
+namespace Libsxpsmart;
 
-/**
- * Las interfaces son como contratos, donde se declaran (pero no se definen) los métodos que han
- * de implementar las clases que IMPLEMENTEN dicha interfaz
- * 
- * Todos los metodos deben ser publicos 
- */
-interface Printable {
-    public function getDescription();
+class Project {
+    private $nombre;
+
+    public function __construct() {
+        $this->nombre = "Una librería de terceros";
+    }
+
+    public function getNombre() {
+        return $this->nombre;
+    }
+
+    public function setNombre($nombre) {
+        $this->nombre = $nombre;
+    }
 }
