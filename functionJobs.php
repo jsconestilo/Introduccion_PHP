@@ -1,6 +1,6 @@
 <?php
 
-  require_once 'app/Models/Printable.php';
+  //require_once 'app/Models/Printable.php';
 
 /**
  * Especificamos los espacios de nombres donde se encuentran declaradas las clases, interfaces importadas en este script

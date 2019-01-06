@@ -1,26 +1,23 @@
 <?php
 
 /**
- * Requerimos las clases que modelan los Job y los Project
- * Importante aclarar que estas clases heredan de la clase BaseElement
+ * Debido a que estamos usando composer, y este esta supervisando algunos espacios de nombres para la carga
+ * automatica de clases, entonces solo requerimos el archivo autoload.php generado por composer
  */
-require_once 'app/Models/Job.php';
-require_once 'app/Models/Project.php';
-
-require_once 'libs-terceros/Project.php';
+require_once 'vendor/autoload.php';
 
 /**
- * Especificamos los espacios de nombres donde se encuentran declaradas las clases importadas en este script
- * seguido del nombre de las mismas.
- * 
- * Si existen clases con el mismo nombre, aunque en diferente namespace, se emplea un alias para nombrar
- * con otro nombre la clase conflictiva 
+ * Estas clases se encuentran dentro de los espacios de nombres supervisados, por ello ya no es necesario requerirlos,
+ * ya que se hace con el autoload anterior
  */
-//use App\Models\Job;
-//use App\Models\Project;
+//require_once 'app/Models/Job.php';
+//require_once 'app/Models/Project.php';
+//require_once 'libs-terceros/Project.php';
 
-//Para evitar la declaración del uso de muchas clases en el mismo espacio de nombres (lo que hace que el script crezca)
-//se emplea...
+/**
+ * Ahora cuando se detecta el "use", composer pone a disposición de este script la carga de la clase necesaria.
+ * todo ello gracias al autoload anterior
+ */
 use App\Models\{Job, Project};
 
 use Libsxpsmart\Project as NewProject;

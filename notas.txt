@@ -1,0 +1,23 @@
+COMPOSER
+
+1. Crear el archivo composer.json
+2. Indicar en la sección de autoload que espacio de nombres y ruta estarán bajo supervisión de psr-4 (autoloading de clases)
+3. Iniciar composer en el proyecto para que genere el autoload.php, descargue librerias (si se ha especificado)
+    asi como genere la carpeta de vendors, con el comando...
+        composer install
+
+4. PSR-4 es un estandar para la carga de clases en nuestros scripts php
+    para ello es necesario que las clases esten registradas bajo un espacio de nombres, y 
+    al momento de utilizarlas hacer una invocacion mediante "use"
+
+    Ejemplo: Si en composer.json se registra en psr-4 el namespace que empiece con App\\ e indicando que se busque en app/
+            composer entendera que todo lo que se encuentre con un namespace App\..., debera registrarse para su posterior autocarga, 
+            Y sera localizado en app/...
+            cuando se haga uso de estos scripts en uno general, solo es necesario requerir el autoload.php de composer ubicado en vendors
+            y al encontrar un use App\...clase.php se cargara en automático esa clase. (no requiriendola de maera manual)
+
+            para el caso de scripts dentro de ese mismo espacio de nombres. no es necesario requerir el autoload. ya que
+            en automático se encuentran unas a otras.
+
+5. Si se altera o agregan cosas al archivo composer.json, es necesario volver a ejecutar
+        composer update

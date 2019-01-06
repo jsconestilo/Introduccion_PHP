@@ -1,25 +1,20 @@
 <?php
-/**
- * Es una buena práctica empleaar espacios de nombres en los archivos de nuestro proyecto.
- * Nada garantiza que existan clases con el mismo nombre en diferentes directorios de nuestro proyecto
- * o peeor aun, que requiramos clases de terceros que coincidan con el noombre de nuestras clases.
- * 
- * El problema viene a relucir cuando se importan clases con el mismo nombre...
- * Por convención no se pueden redeclarar las clases o funciones (error fatal)
- * 
- * Para ello se emplean los espacios de nombres. (es como indicar a PHP que las clases aunque lleven el mismo nombre
- * estas se localizan en diferentes espacios de trabajo, y de ser necesario, pueden renombrarse con un sobrenombre
- * al momento de usarlas "use")
- * 
- * Por convención se sigue la estructura de directorios donde se encuentra alojada la clase para el nomre del namespace
- * 
- * Debe ser la primera definición en el script
- */
+
 namespace App\Models;
 
-//Importar el archivo donde esta declarada la clase padre. Solo se puede
-//requerir una sola vez una clase, el hacerlo más de una se genera un error (igual que las funciones)
-require_once 'BaseElement.php';
+/**
+ * No se requiere mas los scripts necesarios en esta clase o archivo debido a que son cargados automáticamente
+ * por el estandar PSR-4.
+ * Todo ello gracias a composer
+ * 
+ * Para que lo anterior funcione es importante que las clases existan en un espacio de nombres.
+ * en este caso. App\Models;
+ * en el archivo composer.json se le indico que autoload debe buscar todo lo que se "use" en el espacio de nombres que
+ * comienza por "App\\", y a nivel de archivos esto se encuentra en "app/"
+ * entonces BaseElement.php como se encuentra dentro de un subnamespace se carga en automático cuando 
+ * se le encuentra declarado en el código
+ */
+//require_once 'BaseElement.php';
 
 /**
  * Esta clase hereda de la clase BaseElement
