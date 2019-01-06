@@ -16,8 +16,12 @@ require_once 'libs-terceros/Project.php';
  * Si existen clases con el mismo nombre, aunque en diferente namespace, se emplea un alias para nombrar
  * con otro nombre la clase conflictiva 
  */
-use App\Models\Job;
-use App\Models\Project;
+//use App\Models\Job;
+//use App\Models\Project;
+
+//Para evitar la declaración del uso de muchas clases en el mismo espacio de nombres (lo que hace que el script crezca)
+//se emplea...
+use App\Models\{Job, Project};
 
 use Libsxpsmart\Project as NewProject;
 
