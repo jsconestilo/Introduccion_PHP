@@ -1,5 +1,15 @@
 <?php
-class BaseElement {
+
+require_once 'Printable.php';
+
+/**
+ * Para implementar una interfaz en una clase se hace uso de la palabra reservada implements
+ * Se pueden implementar muchas interfaces.
+ * Una interfaz es un contrato, por tanto al implementarla en una clase, la clase está obligada a declarar y definir
+ *    la lógica de los métodos mencionados en dicha interfaz
+ * Cuando una clase padre implementa una interfaz, este comportamiento se hereda a sus clases hijas.
+ */
+class BaseElement implements Printable {
     protected $title;
     public $description;
     public $logros = [];
@@ -51,4 +61,13 @@ class BaseElement {
       }
       return $leyenda;
     } 
+
+    /**
+     * Cuando una clase implementa una interfaz, está obligada a declarar y
+     * definir los métodos especificados por dicha interfaz.
+     */
+    public function getDescription()
+    {
+      return $this->description;
+    }
 }
