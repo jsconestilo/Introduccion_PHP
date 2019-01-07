@@ -2,24 +2,31 @@
 
 namespace App\Models;
 
-/**
- * No se requiere mas los scripts necesarios en esta clase o archivo debido a que son cargados automáticamente
- * por el estandar PSR-4.
- * Todo ello gracias a composer
- * 
- * Para que lo anterior funcione es importante que las clases existan en un espacio de nombres.
- * en este caso. App\Models;
- * en el archivo composer.json se le indico que autoload debe buscar todo lo que se "use" en el espacio de nombres que
- * comienza por "App\\", y a nivel de archivos esto se encuentra en "app/"
- * entonces BaseElement.php como se encuentra dentro de un subnamespace se carga en automático cuando 
- * se le encuentra declarado en el código
- */
-//require_once 'BaseElement.php';
+use Illuminate\Database\Eloquent\Model;
 
 /**
- * Esta clase hereda de la clase BaseElement
- * Al no implementar nuevas caracteristicas, la clase hija se comporta de la misma forma que la clase padre
+ * Para decirle a Eloquent que considere esta clase para mapearla contra una tabla de la base de datos
+ * es necesario especificar que hereda de MODEL
  */
-class Project extends BaseElement {
+class Project extends Model {
+    
+    /**
+     * Indicamos que tabla va a estar vinculada
+     * así como si hay campos en esa tabla para el registro de los timestamp (created_at, updated_at)
+     */
+    protected $table = 'projects';
+    public $timestamps = false;
+
+    /**
+     * Esta función se declara a nivel de Clase, su intensión es que nos retorne un arreglo con las
+     * tecnologías empleadas en cada proyecto que la invoque. (cuando se registra un proyecto, estos datos se encuentran
+     * registrados en una cadena, donde cada tecnologia aparece separada por una coma)
+     */
+    public function tecnologiesAsArray() {
+        //Por tanto cortamos esa cadena a partir del separador indicado (,) y nos retorna un array de cadenas
+        $techs = explode(",", $this->technologies);
+        //Ahora recorremos todo ese array y en cada elemento le hacemos un trim para no tener espacios vacios antes y al final
+        return array_map('trim', $techs);
+    }
 
 }

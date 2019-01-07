@@ -1,33 +1,34 @@
 <?php
-	/* Una práctica común en el pasado era declarar un bloque de PHP al inicio
-	para después utilizar esa lógica generada en nuestro template HTML */
-  $name = 'Alejandro González Reyes';
+  //Con esto se cargaría automáticamente nuestro Manager de Eloquent
+  require_once 'vendor/autoload.php';
 
+  /**
+   * Configuración necesarioa para trabajar con la librería de tercenros Eloquent
+   */
+  use Illuminate\Database\Capsule\Manager as Capsule;
+  $capsule = new Capsule;
+  $capsule->addConnection([
+      'driver'    => 'mysql',
+      'host'      => 'localhost',
+      'database'  => 'curso_php',
+      'username'  => 'root',
+      'password'  => '',
+      'charset'   => 'utf8',
+      'collation' => 'utf8_unicode_ci',
+      'prefix'    => '',
+  ]);
+  // Make this Capsule instance available globally via static methods... (optional)
+  $capsule->setAsGlobal();
+  // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
+  $capsule->bootEloquent();
+
+
+  $name = 'Alejandro González Reyes';
   //Limit para mostrar las experiencias de trabajo menores o iguales a 20 meses
   $limiteMeses = 400;
   
-  /**
-   * Para mantener los scripts de PHP mas ligeros es posible dividir el código en multiples archivos
-   * y posteriormente mandar a llamar esos archivos (su contenido) y embeberlo dentro de otros scripts PHP
-   * Todas las variables o funciones declaradas en estos archivos embebidos se convierten en globales en el script donde se esten invocando
-   * 
-   * include: agrega un archivo sin importar si ya fué agregado. Si el archivo no existe, solo arroja un warning como mensaje de error.
-   * include_once, al igual que include, agrega el archivo pero solo una vez. Si el archivo ya había sido agregado anteriormente, arroja un warning. Si el archivo no existe, tambien mostrará warning.
-   * 
-   * require, agrega un archivo las veces que se llame a la funcion sin importar si estaba agregado o no. PERO, si el archivo no existe, arroja un error fatal.
-   * require_once, permite agregar el archivo externo una sola vez. Si se repite, arroja error fatal y si el archivo no existe, tambien arroja error fatal y termina la ejecución del programa.
-   */
-  
   require_once('jobs.php');
   require_once('functionJobs.php');
-
-  /**
-   * Las funciones no se pueden volver a redeclarar. Entonces es una buena idea invocarlas con xxx_once()
-   * En un blog hay secciones que se repiten. Es una buena idea invocarlas con xxx()
-   * 
-   * Hay momentos que es importante que si o si el archivo requerido exista. Entonces require()
-   * Si no es importante lo anterior entonces un include()
-   */
   
 ?>
 
@@ -97,24 +98,11 @@
 
             for($contador = 0; $contador < $num_elementos; $contador++) {
 
-              //Acumulador de meses de experiencia en los trabajos registrados
-              /**
-               * Recordar que el arreglo contiene objetos de tipo Job
-               */
               $totalMeses += $jobs[$contador]->meses;
 
-              /**
-               * Si el total de meses de experiencia hasta el momento superan el limite 
-               * registrado al inicio del script. Entonces hacemos un BREAK (paramos o detenemos)
-               * al ciclo, y por tanto las siguientes iteraciones no se ejecutarían.
-               * 
-               * La estructura condicional IF evalua una condición lógica, en caso de ser verdadera
-               * se ejecutan sus instrucciones internas, de lo contrario no se ejecutan
-               */
               if($totalMeses > $limiteMeses) {
                 break;
               }
-              
               //Invocar la función para que imprima los detalles del trabajo actual en el arreglo, 
               //así como la suma total de meses de experiencia
               
@@ -129,29 +117,15 @@
             <ul>
             <?php
               /**
-               * Aprovechamos la misma funcionalidad de la función generica imprimirDetalles para mostrar
-               * las caracteristicas de cada objeto de tipo Project
+               * En el archivo functionJobs se añadió otra función que espera un objeto de la clase
+               * Project, con la finalidad de imprimir sus detalles a nivel de vista
+               * $projects = array de objetos Project
                */
-              for($x=0; $x<count($projects); $x++) {
-                imprimirDetalles($projects[$x]);
+              foreach ($projects as $project) {
+                imprimirDetallesProject($project);
               }
             ?>
             </ul>
-            <!--div class="project">
-                <h5>Project X</h5>
-                <div class="row">
-                    <div class="col-3">
-                        <img id="profile-picture" src="https://ui-avatars.com/api/?name=John+Doe&size=255" alt="">
-                      </div>
-                      <div class="col">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius earum corporis at accusamus quisquam hic quos vel? Tenetur, ullam veniam consequatur esse quod cum, quam cupiditate assumenda natus maiores aperiam.</p>
-                        <strong>Technologies used:</strong>
-                        <span class="badge badge-secondary">PHP</span>
-                        <span class="badge badge-secondary">HTML</span>
-                        <span class="badge badge-secondary">CSS</span>
-                      </div>
-                </div>
-            </div-->
           </div>
       </div>
       <div class="col-3">

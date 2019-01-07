@@ -1,27 +1,9 @@
 <?php
 
-  //require_once 'app/Models/Printable.php';
+  //use App\Models\Printable; Ya no es necesaria, ya que la clase Job no implementa dicha interfaz (ahora hereda de MOdel)
+  use App\Models\Project;
 
-/**
- * Especificamos los espacios de nombres donde se encuentran declaradas las clases, interfaces importadas en este script
- * seguido del nombre de las mismas.
- * 
- * Si existen clases con el mismo nombre, aunque en diferente namespace, se emplea un alias para nombrar
- * con otro nombre la clase conflictiva 
- */
-  use App\Models\Printable;
-
-  /**
-   * Type Hinting: Determinación de tipos
-   * Permite forzar a una funcion a recibir cierto tipo de datos como sus correspondientes parametros
-   * Clases, arrays, interfaces, callables.
-   * 
-   * Como PHP es un lenguaje debilmente tipado y a su vez es de tipado dinámico, la determinación de tipos
-   * es una excelente manera para forzar a esperar un determinado tipo de dato (Fuertemente utilizado en POO)
-   * 
-   * En este caso la función imprimirDetalles espera un objeto que implemente la interfaz Printable
-   */
-  function imprimirDetalles(Printable $job_or_project) {
+  function imprimirDetalles($job_or_project) {
 
     /**
      * Mostrar solo aquellas experiencias de trabajo que en el arreglo estén declaradas
@@ -33,17 +15,45 @@
     }
 
     echo "<li class='work-position'>";
-      echo "<h5>{$job_or_project->getTitle()}</h5>";
+      echo "<h5>{$job_or_project->title}</h5>";
 
       //Llamar a un método definido en el objeto, mismo que fue impuesto por la interfaz Printable
-      echo "<p>". $job_or_project->getDescription() ."</p>";
+      echo "<p>". $job_or_project->description ."</p>";
       
       echo "<p>". $job_or_project->getTiempoLaboral() ."</p>";
       echo "<strong>Achievements:</strong>";
-      echo "<ul>";
+      /*echo "<ul>";
         for ($i=0; $i < count($job_or_project->logros); $i++) { 
           echo "<li>{$job_or_project->logros[$i]}.</li>";
         }
-      echo "</ul>";
+      echo "</ul>";*/
     echo "</li>";
+  }
+
+
+  /**
+   * Esta función mediante declaración de tipos espera un objeto de tipo Project
+   * para poder mostrar sus detalles con un formato adecuado.
+   */
+  function imprimirDetallesProject(Project $project) {
+    echo '<div class="project">';
+      echo '<h5>'. $project->title .'</h5>';
+      echo '<div class="row">';
+          echo '<div class="col-3">';
+              echo '<img id="profile-picture" src="https://ui-avatars.com/api/?name=John+Doe&size=255" alt="">';
+            echo '</div>';
+            echo '<div class="col">';
+              echo '<p>'. $project->description .'</p>';
+              echo '<strong>Technologies used:</strong>';
+              /**
+               * Esta función se declaró a nivel de Clase, su intensión es que nos retorne un arreglo con las
+               * tecnologías empleadas en este proyecto. (cuando se registra un proyecto, estos datos se encuentran
+               * registrados en una cadena, donde cada tecnologpia aparece separada por una coma)
+               */
+              foreach ($project->tecnologiesAsArray() as $technology) {
+                echo '<span class="badge badge-secondary">'. $technology .'</span> ';
+              }
+            echo '</div>';
+      echo '</div>';
+    echo '</div>';
   }
