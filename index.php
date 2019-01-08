@@ -1,27 +1,4 @@
 <?php
-  //Con esto se cargaría automáticamente nuestro Manager de Eloquent
-  require_once 'vendor/autoload.php';
-
-  /**
-   * Configuración necesarioa para trabajar con la librería de tercenros Eloquent
-   */
-  use Illuminate\Database\Capsule\Manager as Capsule;
-  $capsule = new Capsule;
-  $capsule->addConnection([
-      'driver'    => 'mysql',
-      'host'      => 'localhost',
-      'database'  => 'curso_php',
-      'username'  => 'root',
-      'password'  => '',
-      'charset'   => 'utf8',
-      'collation' => 'utf8_unicode_ci',
-      'prefix'    => '',
-  ]);
-  // Make this Capsule instance available globally via static methods... (optional)
-  $capsule->setAsGlobal();
-  // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
-  $capsule->bootEloquent();
-
 
   $name = 'Alejandro González Reyes';
   //Limit para mostrar las experiencias de trabajo menores o iguales a 20 meses

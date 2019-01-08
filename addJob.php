@@ -1,43 +1,7 @@
 <?php
 
-require_once 'vendor/autoload.php';
-
 use App\Models\Job;
 
-/**Configuración de Eloquent
- * 
- */
-use Illuminate\Database\Capsule\Manager as Capsule;
-
-$capsule = new Capsule;
-
-$capsule->addConnection([
-    'driver'    => 'mysql',
-    'host'      => 'localhost',
-    'database'  => 'curso_php',
-    'username'  => 'root',
-    'password'  => '',
-    'charset'   => 'utf8',
-    'collation' => 'utf8_unicode_ci',
-    'prefix'    => '',
-]);
-// Make this Capsule instance available globally via static methods... (optional)
-$capsule->setAsGlobal();
-
-// Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
-$capsule->bootEloquent();
-
-
-
-
-/**
- * Variables superglobales que contienen la información enviada a este script
- * ya sea por get o por post
- * (generalmente desde un formulario - POST)
- * o via url (GET)
- */
-//var_dump($_POST);
-//var_dump($_GET);
 
 if(isset($_POST['enviar'])) {
     $job = new Job();
