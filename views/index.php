@@ -1,26 +1,19 @@
-<?php
-
-  
-  
-  require_once('jobs.php');
-  require_once('functionJobs.php');
-  
-?>
-
 <!doctype html>
 <html lang="en">
 
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
+ 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
     crossorigin="anonymous">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" type="text/css">
 
   <title>Resume</title>
+  
 </head>
 
 <body>
@@ -65,24 +58,12 @@
           <h3 class="border-bottom-gray" >Work Experience</h3>
           <ul>
           <?php
-            
-            $num_elementos = count($jobs);
-            
-            //Inicializar el acumuluador de meses de experiencias en los trabajos registrados.
-            $totalMeses = 0;
-
-            for($contador = 0; $contador < $num_elementos; $contador++) {
-
-              $totalMeses += $jobs[$contador]->meses;
-
+            foreach($jobs as $job) {
+              $totalMeses += $job->months;
               if($totalMeses > $limiteMeses) {
                 break;
               }
-              //Invocar la función para que imprima los detalles del trabajo actual en el arreglo, 
-              //así como la suma total de meses de experiencia
-              
-              //En este caso pasamos el objeto localizado en esta posición actual en el arreglo
-              imprimirDetalles($jobs[$contador]);
+              $job->imprimirDetalles();
             }
             ?>
           </ul>
@@ -97,7 +78,7 @@
                * $projects = array de objetos Project
                */
               foreach ($projects as $project) {
-                imprimirDetallesProject($project);
+                $project->imprimirDetalles();
               }
             ?>
             </ul>

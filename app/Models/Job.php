@@ -43,4 +43,17 @@ class Job extends Model {
         }
         return 'Experiencia laboral: ' . $leyenda;
     }
+
+
+    public function imprimirDetalles() {
+        if($this->getAttribute('visible')) {
+            echo "<li class='work-position'>";
+                echo "<h5>{$this->title}</h5>";
+                echo "<p>". $this->description ."</p>";
+                echo "<p>". $this->getTiempoLaboral() ."</p>";
+                echo "<strong>Achievements:</strong>";
+            echo "</li>";
+        }
+        
+    }
 }

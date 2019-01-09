@@ -56,7 +56,10 @@ $map->get('index', '/', [
     'controller' => 'App\Controllers\IndexController',
     'action' => 'index'
 ]);
-$map->get('addJobs', '/jobs/add', '../addJob.php');
+$map->get('addJobs', '/jobs/add', [
+    'controller' => 'App\Controllers\JobController',
+    'action' => 'create'
+]);
 
 $matcher = $routerContainer->getMatcher();
 $route = $matcher->match($request);

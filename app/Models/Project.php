@@ -29,4 +29,27 @@ class Project extends Model {
         return array_map('trim', $techs);
     }
 
+    public function imprimirDetalles() {
+        echo '<div class="project">';
+          echo '<h5>'. $this->title .'</h5>';
+          echo '<div class="row">';
+              echo '<div class="col-3">';
+                  echo '<img id="profile-picture" src="https://ui-avatars.com/api/?name=John+Doe&size=255" alt="">';
+                echo '</div>';
+                echo '<div class="col">';
+                  echo '<p>'. $this->description .'</p>';
+                  echo '<strong>Technologies used:</strong>';
+                  /**
+                   * Esta función se declaró a nivel de Clase, su intensión es que nos retorne un arreglo con las
+                   * tecnologías empleadas en este proyecto. (cuando se registra un proyecto, estos datos se encuentran
+                   * registrados en una cadena, donde cada tecnologpia aparece separada por una coma)
+                   */
+                  foreach ($this->tecnologiesAsArray() as $technology) {
+                    echo '<span class="badge badge-secondary">'. $technology .'</span> ';
+                  }
+                echo '</div>';
+          echo '</div>';
+        echo '</div>';
+    }
+
 }
