@@ -4,10 +4,10 @@ namespace App\Controllers;
 
 use App\Models\Job;
 
-class JobController {
+class JobController extends BaseController {
 
     public function create() {
-        require_once '../views/addJob.php';
+        echo $this->renderHTML('addJob.php');
     }
 
     public function store($request) {
