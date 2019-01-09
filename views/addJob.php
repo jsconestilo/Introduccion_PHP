@@ -12,7 +12,7 @@
 <body>
     <div class="container">
         <h1>Add Job</h1>
-        <form action="" method="POST">
+        <form action="/jobs/add" method="POST">
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" name="title" id="title" class="form-control" placeholder="Ingrese un titulo para el trabajo">

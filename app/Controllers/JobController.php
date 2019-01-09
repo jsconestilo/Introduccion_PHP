@@ -7,17 +7,23 @@ use App\Models\Job;
 class JobController {
 
     public function create() {
-        
-        if(isset($_POST['enviar'])) {
+        require_once '../views/addJob.php';
+    }
+
+    public function store($request) {
+        if($request->getMethod() == 'POST') {
+
+            $postData = $request->getParsedBody();
+            
             $job = new Job();
-            $job->title = $_POST['title'];
-            $job->description = $_POST['description'];
-            $job->months = $_POST['months'];
-            $job->visible = $_POST['visible'];
+            $job->title = $postData['title'];
+            $job->description = $postData['description'];
+            $job->months = $postData['months'];
+            $job->visible = $postData['visible'];
 
             $job->save();
         }
-
+        
         require_once '../views/addJob.php';
     }
 

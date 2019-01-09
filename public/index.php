@@ -56,9 +56,13 @@ $map->get('index', '/', [
     'controller' => 'App\Controllers\IndexController',
     'action' => 'index'
 ]);
-$map->get('addJobs', '/jobs/add', [
+$map->get('createJobs', '/jobs/add', [
     'controller' => 'App\Controllers\JobController',
     'action' => 'create'
+]);
+$map->post('storeJobs', '/jobs/add', [
+    'controller' => 'App\Controllers\JobController',
+    'action' => 'store'
 ]);
 
 $matcher = $routerContainer->getMatcher();
@@ -72,7 +76,7 @@ if(!$route) {
     $actionName = $handlerData['action'];
 
     $controller = new $controllerName;
-    $controller->$actionName();
+    $controller->$actionName($request);
     //require_once $route->handler;
 }
 
