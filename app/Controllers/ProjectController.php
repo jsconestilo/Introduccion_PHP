@@ -4,10 +4,10 @@ namespace App\Controllers;
 
 use App\Models\Project;
 
-class ProjectController {
+class ProjectController extends BaseController {
 
     public function create() {
-        require_once '../views/addProject.php';
+        return $this->renderHTML('addProject.twig');
     }
 
     public function store($request) {
@@ -22,7 +22,7 @@ class ProjectController {
             $project->save();
         }
 
-        require_once '../views/addProject.php';
+        return $this->renderHTML('addProject.twig');
     }
 
 }

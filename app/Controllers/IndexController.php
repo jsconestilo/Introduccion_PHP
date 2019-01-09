@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\{Job, Project};
 use Libsxpsmart\Project as NewProject;
 
-class IndexController {
+class IndexController extends BaseController {
 
     public function index() {
         $name = 'Alejandro González Reyes';
@@ -17,7 +17,14 @@ class IndexController {
         $projects = Project::all();
         $lib_project = new NewProject();
 
-        require_once '../views/index.php';
+        return $this->renderHTML('index.twig', [
+            'name' => $name,
+            'limiteMeses' => $limiteMeses,
+            'totalMeses' => $totalMeses,
+            'lib_project' => $lib_project,
+            'jobs' => $jobs,
+            'projects' => $projects,
+        ]);
     }
 
 }

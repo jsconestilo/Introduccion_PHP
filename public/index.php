@@ -85,8 +85,7 @@ if(!$route) {
     $actionName = $handlerData['action'];
 
     $controller = new $controllerName;
-    $controller->$actionName($request);
-    //require_once $route->handler;
+    $response = $controller->$actionName($request);
+    
+    echo $response->getBody();
 }
-
-//var_dump($route->handler);
