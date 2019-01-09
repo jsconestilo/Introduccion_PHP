@@ -3,6 +3,12 @@
 {% block content %}
     <h1>Add Project</h1>
 
+    {% if responseMessage %}
+        <div class="alert alert-primary" role="alert">
+            {{ responseMessage }}
+        </div>
+    {% endif %}
+
     <form action="/projects/add" method="POST">
         <div class="form-group">
             <label for="title">Title</label>

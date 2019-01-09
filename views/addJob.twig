@@ -2,6 +2,13 @@
 
 {% block content %}
     <h1>Add Job</h1>
+
+    {% if responseMessage %}
+        <div class="alert alert-primary" role="alert">
+            {{ responseMessage }}
+        </div>
+    {% endif %}
+    
     <form action="/jobs/add" method="POST">
         <div class="form-group">
             <label for="title">Title</label>
