@@ -52,7 +52,10 @@ use Aura\Router\RouterContainer;
 $routerContainer = new RouterContainer();
 $map = $routerContainer->getMap();
 
-$map->get('index', '/', '../index.php');
+$map->get('index', '/', [
+    'controller' => 'App\Controllers\IndexController',
+    'action' => 'index'
+]);
 $map->get('addJobs', '/jobs/add', '../addJob.php');
 
 $matcher = $routerContainer->getMatcher();
@@ -61,7 +64,13 @@ $route = $matcher->match($request);
 if(!$route) {
     echo "Error 404, página no localizada";
 } else {
-    require_once $route->handler;
+    $handlerData = $route->handler;
+    $controllerName = $handlerData['controller'];
+    $actionName = $handlerData['action'];
+
+    $controller = new $controllerName;
+    $controller->$actionName();
+    //require_once $route->handler;
 }
 
-//var_dump($route);
+//var_dump($route->handler);
