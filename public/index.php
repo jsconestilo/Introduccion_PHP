@@ -33,6 +33,19 @@ $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
 /**
+ * Configuración librería diactoros para mensajes http (request / response)
+ */
+$request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
+    $_SERVER,
+    $_GET,
+    $_POST,
+    $_COOKIE,
+    $_FILES
+);
+
+var_dump($request->getUri()->getPath());
+
+/**
  * Verificamos que página solicita el usuario a través de una cadena de consulta
  * esto es un minirouter
  */
