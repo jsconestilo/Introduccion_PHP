@@ -65,6 +65,15 @@ $map->post('storeJobs', '/jobs/add', [
     'action' => 'store'
 ]);
 
+$map->get('createProjects', '/projects/add', [
+    'controller' => 'App\Controllers\ProjectController',
+    'action' => 'create'
+]);
+$map->post('storeProjects', '/projects/add', [
+    'controller' => 'App\Controllers\ProjectController',
+    'action' => 'store'
+]);
+
 $matcher = $routerContainer->getMatcher();
 $route = $matcher->match($request);
 
