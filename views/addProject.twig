@@ -9,7 +9,7 @@
         </div>
     {% endif %}
 
-    <form action="/projects/add" method="POST">
+    <form action="/projects/add" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" name="title" id="title" class="form-control" placeholder="Ingrese un titulo para el proyecto">
@@ -21,6 +21,10 @@
         <div class="form-group">
             <label for="technologies">Tecnologies</label>
             <input type="text" name="technologies" class="form-control" placeholder="Ingrese las tecnologías aplicadas (separar por comas)">
+        </div>
+        <div class="form-group">
+            <label for="logo">Image</label>
+            <input type="file" name="logo" class="form-control" placeholder="Ingrese una imagen reperesentativa">
         </div>
         <input type="submit" name="enviar" value="Enviar Registro" class="btn btn-primary">
     </form>

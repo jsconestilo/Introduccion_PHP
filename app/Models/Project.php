@@ -34,7 +34,7 @@ class Project extends Model {
           echo '<h5>'. $this->title .'</h5>';
           echo '<div class="row">';
               echo '<div class="col-3">';
-                  echo '<img id="profile-picture" src="https://ui-avatars.com/api/?name=John+Doe&size=255" alt="">';
+                  echo '<img id="profile-picture" src="'. $this->logo .'" alt="" width="150">';
                 echo '</div>';
                 echo '<div class="col">';
                   echo '<p>'. $this->description .'</p>';
