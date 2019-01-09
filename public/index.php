@@ -34,6 +34,7 @@ $capsule->bootEloquent();
 
 /**
  * Configuración librería diactoros para mensajes http (request / response)
+ * compatible con PSR7
  */
 $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
     $_SERVER,
@@ -43,17 +44,24 @@ $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
     $_FILES
 );
 
-var_dump($request->getUri()->getPath());
-
 /**
- * Verificamos que página solicita el usuario a través de una cadena de consulta
- * esto es un minirouter
+ * Configuración de Router compatible con PSR7
  */
-$route = $_GET['route'] ?? '/';
+use Aura\Router\RouterContainer;
 
-if($route == '/') {
-    require_once '../index.php';
+$routerContainer = new RouterContainer();
+$map = $routerContainer->getMap();
+
+$map->get('index', '/', '../index.php');
+$map->get('addJobs', '/jobs/add', '../addJob.php');
+
+$matcher = $routerContainer->getMatcher();
+$route = $matcher->match($request);
+
+if(!$route) {
+    echo "Error 404, página no localizada";
+} else {
+    require_once $route->handler;
 }
-elseif($route == 'addJob') {
-    require_once '../addJob.php';
-}
+
+//var_dump($route);
