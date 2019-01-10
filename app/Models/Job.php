@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Job extends Model {
 
+    private static $sumaMeses = 0;
+    private $limiteMeses = 30;
+
     protected $table = "jobs";
     public $timestamps = false;
 
@@ -46,6 +49,10 @@ class Job extends Model {
 
 
     public function imprimirDetalles() {
+        self::$sumaMeses += $this->months;
+        if(self::$sumaMeses > $this->limiteMeses) {
+            return;
+        }
         if($this->getAttribute('visible')) {
             echo "<li class='work-position'>";
                 echo "<h5>{$this->title}</h5>";

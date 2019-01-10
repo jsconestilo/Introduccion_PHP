@@ -7,7 +7,7 @@ use Respect\Validation\Validator as v;
 use Respect\Validation\Exceptions\ValidationException;
 
 class JobController extends BaseController {
-
+    
     public function create() {
         return $this->renderHTML('addJob.twig');
     }

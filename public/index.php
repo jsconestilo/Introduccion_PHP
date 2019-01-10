@@ -14,6 +14,9 @@ error_reporting(E_ALL);
 
 require_once '../vendor/autoload.php';
 
+//Inicializar la sessión para autenticación
+session_start();
+
 //Configuración necesaria para trabajar con la librería de tercenros Eloquent
 use Illuminate\Database\Capsule\Manager as Capsule;
 $capsule = new Capsule;
@@ -58,20 +61,52 @@ $map->get('index', '/', [
 ]);
 $map->get('createJobs', '/jobs/add', [
     'controller' => 'App\Controllers\JobController',
-    'action' => 'create'
+    'action' => 'create',
+    'auth' => true
 ]);
 $map->post('storeJobs', '/jobs/add', [
     'controller' => 'App\Controllers\JobController',
-    'action' => 'store'
+    'action' => 'store',
+    'auth' => true
 ]);
 
 $map->get('createProjects', '/projects/add', [
     'controller' => 'App\Controllers\ProjectController',
-    'action' => 'create'
+    'action' => 'create',
+    'auth' => true
 ]);
 $map->post('storeProjects', '/projects/add', [
     'controller' => 'App\Controllers\ProjectController',
+    'action' => 'store',
+    'auth' => true
+]);
+
+$map->get('createUsers', '/users/add', [
+    'controller' => 'App\Controllers\UserController',
+    'action' => 'create'
+]);
+$map->post('storeUsers', '/users/add', [
+    'controller' => 'App\Controllers\UserController',
     'action' => 'store'
+]);
+
+$map->get('loginUsers', '/login', [
+    'controller' => 'App\Controllers\AuthController',
+    'action' => 'login'
+]);
+$map->post('accessUsers', '/login', [
+    'controller' => 'App\Controllers\AuthController',
+    'action' => 'access'
+]);
+$map->get('logoutUsers', '/logout', [
+    'controller' => 'App\Controllers\AuthController',
+    'action' => 'logout'
+]);
+
+$map->get('admin', '/admin', [
+    'controller' => 'App\Controllers\AdminController',
+    'action' => 'index',
+    'auth' => true
 ]);
 
 $matcher = $routerContainer->getMatcher();
@@ -83,9 +118,30 @@ if(!$route) {
     $handlerData = $route->handler;
     $controllerName = $handlerData['controller'];
     $actionName = $handlerData['action'];
+    //Verificar si la ruta requiere autenticación
+    $needsAuth = $handlerData['auth'] ?? false;
+
+    $sessionUserId = $_SESSION['userId'] ?? null;
+    if($needsAuth && !$sessionUserId) {
+        //echo "ruta protegida Error 403";
+        //die;
+        $controllerName = "App\Controllers\AuthController";
+        $actionName = "loginRequired";
+    }
 
     $controller = new $controllerName;
     $response = $controller->$actionName($request);
+
     
+    
+    //Obtener encabezados que se han generado para las respuestas
+    foreach($response->getHeaders() as $name => $values) {
+        foreach ($values as $value) {
+            header(sprintf('%s: %s', $name, $value), false);
+        }
+    }
+    //Establecer un código de respuesta
+    http_response_code($response->getStatusCode());
+
     echo $response->getBody();
 }

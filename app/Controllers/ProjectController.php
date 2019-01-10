@@ -8,7 +8,7 @@ use Respect\Validation\Validator as v;
 use Respect\Validation\Exceptions\ValidationException;
 
 class ProjectController extends BaseController {
-
+    
     public function create() {
         return $this->renderHTML('addProject.twig');
     }
