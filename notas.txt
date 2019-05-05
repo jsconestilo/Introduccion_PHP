@@ -21,3 +21,16 @@ COMPOSER
 
 5. Si se altera o agregan cosas al archivo composer.json, es necesario volver a ejecutar
         composer update
+
+
+6. 	El proyecto necesita una base de datos llamada "curso_php" en MySQL
+	3 Tablas "jobs, projects, users"
+	
+7. 	Para arrancar el proyecto se requiere iniciar el servidor interno de php
+	como administrador sudo, dentro de la carpeta "public/"
+	php -S localhost:8000
+
+8. 	Las rutas de navegación están definidas en el archivo index.php del directorio public
+
+
+Mi usuario es jsconestilo@gmail.com y 123456 como pass
